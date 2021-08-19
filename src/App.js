@@ -7,6 +7,7 @@ export default class App extends React.Component {
 
   constructor(props) {
     super(props);
+    this.url = 'https://jsonplaceholder.typicode.com/users';
     this.newUser = {
       id: "",
       name: "",
@@ -25,9 +26,8 @@ export default class App extends React.Component {
   }
 
   fetchUsers = () => {
-    const url = 'https://jsonplaceholder.typicode.com/users';
     this.setState({...this.state, isDataFetching: true});
-    fetch (url)
+    fetch (this.url)
     .then (response => response.json())
     .then (data => {
       this.setState({ users: data, isDataFetching:false });
@@ -47,6 +47,23 @@ export default class App extends React.Component {
     else this.setState({ currentUser: ( {...this.state.currentUser, [parentKey]: ({...this.state.currentUser[parentKey], [key]: val}) } ) });
   }
 
+  makeUserCurrent = (userId,e) => {
+    //alert("User #"+userId+" is active" );
+    e.preventDefault();
+    this.setState({ currentUser: this.state.users.find(el=>el.id===userId) });
+  }
+
+  clearCurrentUser = (e) => {
+    //alert("Clear" );
+    e.preventDefault();
+    this.setState({ currentUser: this.newUser });
+  }
+
+  saveCurrentUser = (e) => {
+    alert("Save" );
+    e.preventDefault();
+  }
+
   render() {
     //console.log("New User Array:");
     console.log(this.state.currentUser);
@@ -58,7 +75,10 @@ export default class App extends React.Component {
             <div className="col-lg-9 order-2 order-lg-1 mb-4">
               { this.state.isDataFetching
                 ? <div className="text-center py3 h5">Loading ...</div>
-                : <BootstrapTable users={this.state.users} />
+                : <BootstrapTable
+                    users={this.state.users}
+                    makeUserCurrent={this.makeUserCurrent}
+                  />
               }
             </div>
             <div className="col-md-8 col-lg-3 order-1 order-lg-2 mb-4">
@@ -67,6 +87,8 @@ export default class App extends React.Component {
                   newUser={this.newUser}
                   currentUser={this.state.currentUser}
                   setUserFormValue={this.setUserFormValue}
+                  clearCurrentUser={this.clearCurrentUser}
+                  saveCurrentUser={this.saveCurrentUser}
                   users={this}
                 />
               </div>

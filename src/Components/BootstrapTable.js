@@ -21,7 +21,11 @@ export default class BootstrapTable extends React.Component {
           </thead>
           <tbody>
             { this.props.users.map(x=>
-              <BootstrapTableCell key={x.id} user={x} />
+              <BootstrapTableCell
+                key={x.id}
+                user={x}
+                makeUserCurrent={this.props.makeUserCurrent}
+              />
             ) }
           </tbody>
         </table>

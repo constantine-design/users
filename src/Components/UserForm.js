@@ -13,6 +13,22 @@ export default class UserForm extends React.Component {
 
     return (
       <form className="users-form" >
+        <div className="text-end">
+          <button
+            className="btn btn-secondary btn-sm"
+            style={{fontSize:"0.7rem"}}
+            onClick={this.props.clearCurrentUser}
+          >
+            Clear
+          </button>
+          <button
+            className="btn btn-warning btn-sm ms-2"
+            style={{fontSize:"0.7rem"}}
+            onClick={this.props.saveCurrentUser}
+          >
+            Save
+          </button>
+        </div>
         {
           Object.keys(this.props.newUser).map(key=> {
             const isObj = (typeof this.props.newUser[key] === 'object');

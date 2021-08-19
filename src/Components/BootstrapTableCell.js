@@ -13,7 +13,11 @@ export default class BootstrapTableCell extends React.Component {
         <td>{this.props.user.website}</td>
         <td>{Object.values(this.props.user.company).join(', ')}</td>
         <td>
-          <button className="btn btn-primary btn-sm" style={{fontSize:"0.7rem"}}>
+          <button
+            className="btn btn-primary btn-sm"
+            style={{fontSize:"0.7rem"}}
+            onClick={(e)=>this.props.makeUserCurrent(this.props.user.id,e)}
+          >
             Edit
           </button>
         </td>
