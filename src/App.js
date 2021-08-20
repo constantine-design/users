@@ -37,7 +37,7 @@ export default class App extends React.Component {
       this.setState({ users: data });
       this.newUser.id = (Math.max( ...this.state.users.map(el=>el.id)) + 1); // set new key plus 1 to biggest
       this.setState({ isDataFetching:false });
-      console.log('Fetched!');
+      //console.log('Fetched!');
     })
     .catch(e=> {
       this.setState({...this.state, isDataFetching: false});
@@ -87,7 +87,6 @@ export default class App extends React.Component {
 
   deleteCurrentUser = (e) => {
     //alert("Delete current user" );
-    e.preventDefault();
     e.preventDefault();
     fetch(this.url, {
       method: 'DELETE',
