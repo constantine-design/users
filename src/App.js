@@ -29,14 +29,15 @@ export default class App extends React.Component {
     };
   }
 
-  fetchUsers = () => {
-    this.setState({...this.state, isDataFetching: true});
+  fetchUsers = (softRefresh=false) => {
+    if (!softRefresh) this.setState({...this.state, isDataFetching: true});
     fetch (this.url)
     .then (response => response.json())
     .then (data => {
       this.setState({ users: data });
       this.newUser.id = (Math.max( ...this.state.users.map(el=>el.id)) + 1); // set new key plus 1 to biggest
       this.setState({ isDataFetching:false });
+      console.log('Fetched!');
     })
     .catch(e=> {
       this.setState({...this.state, isDataFetching: false});
@@ -44,8 +45,13 @@ export default class App extends React.Component {
     });
   }
 
+
   componentDidMount() {
     this.fetchUsers();
+    this.interval = setInterval(() => this.fetchUsers(true), 10000); // added automatic refresh
+  }
+  componentWillUnmount() {
+    clearInterval(this.interval);
   }
 
   setUserFormValue = (val, key, parentKey) => {
