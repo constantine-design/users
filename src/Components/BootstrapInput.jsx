@@ -9,7 +9,8 @@ export default class BootstrapInput extends React.Component {
         </label>
         <input
           type="text"
-          className="form-control"
+          className={"form-control"+((this.props.name==="id")?" bg-secondary":"")}
+          disabled={(this.props.name==="id")?" disabled":""}
           value={ this.props.parentName
             ? this.props.currentUser[this.props.parentName][this.props.name]
             : this.props.currentUser[this.props.name]

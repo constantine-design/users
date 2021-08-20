@@ -8,15 +8,11 @@ export default class BootstrapTable extends React.Component {
         <table className="table table-dark table-striped" style={{fontSize:"0.7rem"}}>
           <thead>
             <tr>
-              <th>#</th>
-              <th>name</th>
-              <th>username</th>
-              <th>email</th>
-              <th>adress</th>
-              <th>phone</th>
-              <th>website</th>
-              <th>company</th>
-              <th>edit</th>
+              { Object.keys(this.props.newUser).map((val,key)=>
+                  <th key={"t"+key}>{val}</th>
+                )
+              }
+              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -24,6 +20,7 @@ export default class BootstrapTable extends React.Component {
               <BootstrapTableCell
                 key={x.id}
                 user={x}
+                newUser={this.props.newUser}
                 makeUserCurrent={this.props.makeUserCurrent}
               />
             ) }
