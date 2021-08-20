@@ -90,7 +90,7 @@ export default class App extends React.Component {
     })
     .then(response => { return response.json( ) })
     .then(data => console.log(data) );
-
+    // update users after all
     this.fetchUsers();
   }
 
