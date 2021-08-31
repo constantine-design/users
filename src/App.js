@@ -75,7 +75,7 @@ export default class App extends React.Component {
     //alert("Save" );
     e.preventDefault();
     fetch(this.url, {
-      method: 'PUT',
+      method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(this.state.currentUser)
     })
